@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="todoApp">
+<html ng-app="regisKuApp">
   <head>
     <!-- CSS file -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -14,11 +14,13 @@
 
     <!-- App controller -->
     <script src="src/js/controller/todo.js"></script>
+    <script src="src/js/controller/userProfile.js"></script>
     <script src="src/js/route/route.js"></script>
 
     <!-- some navigation -->
     <ul class="nav nav-pills">
     <li role="presentation"><a ui-sref="home">Home</a></li>
+    <li role="presentation"><a ui-sref="userprofile">User profile</a></li>
     <li role="presentation"><a ui-sref="changepage">Change Page</a></li>
   </ul>
 

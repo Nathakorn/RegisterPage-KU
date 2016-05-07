@@ -1,4 +1,4 @@
-angular.module('todoApp', ['ui.router'])
+angular.module('regisKuApp', ['ui.router'])
   .controller('TodoListController', ['$scope', 
     function ($scope) {
     var todoList = this;

@@ -1,4 +1,4 @@
-angular.module('todoApp')
+angular.module('regisKuApp')
 .config(function($stateProvider, $urlRouterProvider) {
   //
   // For any unmatched url, redirect to /home
@@ -9,6 +9,10 @@ angular.module('todoApp')
     .state('home', {
       url: "/home",
       templateUrl: "src/view/home.tmpl"
+    })
+    .state('userprofile', {
+      url: "/userprofile",
+      templateUrl: "src/view/userProfile.tmpl"
     })
     .state('changepage', {
       url: "/changepage",
