@@ -3,7 +3,16 @@ var app = angular.module('regisKuApp', ['ui.router']);
     function ($scope, $http, $stateParams) {
     //Mock up database
     //Insert
-    
+    $http.post('http://52.37.98.127:3000/v1/5610545668?pin=1029', {
+          "5610545668": {
+              "ID": "5610545668",
+              "firstName": "Nathakorn",
+              "surName": "Sukumsirichart",
+              "gender": "male",
+              "thaiID": "1234567890123",
+              "nationality": "Thai"
+          }
+      });
     /*
     $http.post('http://52.37.98.127:3000/v1/5610545668?pin=1029', {
           "5610545001": {
@@ -42,10 +51,7 @@ var app = angular.module('regisKuApp', ['ui.router']);
     $http.delete('http://52.37.98.127:3000/v1/5610545668/5555555556?pin=1029')
     */   
     //Get profile
-    $scope.userProfile;
-    $scope.ID = $stateParams.ID;
-    console.log($stateParams.ID);
-    $http.get('http://52.37.98.127:3000/v1/5610545668/' + $scope.ID + '?pin=1029')
+    $http.get('http://52.37.98.127:3000/v1/5610545668/5610545668?pin=1029')
         .success(function (data){
           console.log(data);
           $scope.userProfile = data;
