@@ -97,6 +97,6 @@ app.controller('loginController', ['$scope', '$http', '$stateParams', '$location
       $scope.ID = "";
       $scope.login = function () {
         console.log($scope.ID);
-        $location.path("/"+ $scope.ID + "/home");      
+        $location.path("/home");      
       }
   }]);

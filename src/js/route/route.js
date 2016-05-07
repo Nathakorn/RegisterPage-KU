@@ -2,7 +2,7 @@ angular.module('regisKuApp')
 .config(function($stateProvider, $urlRouterProvider) {
   //
   // For any unmatched url, redirect to /home
-  $urlRouterProvider.otherwise("/home");
+  $urlRouterProvider.otherwise("/login");
   //
   // Now set up the states
   $stateProvider
@@ -15,7 +15,7 @@ angular.module('regisKuApp')
       templateUrl: "src/view/login.tmpl"
     })
     .state('userprofile', {
-      url: "/{ID:string}/userprofile/",
+      url: "/userprofile/",
       templateUrl: "src/view/userProfile.tmpl"
     })
     .state('changepage', {
