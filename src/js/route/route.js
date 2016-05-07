@@ -10,8 +10,12 @@ angular.module('regisKuApp')
       url: "/home",
       templateUrl: "src/view/home.tmpl"
     })
+    .state('login', {
+      url: "/login",
+      templateUrl: "src/view/login.tmpl"
+    })
     .state('userprofile', {
-      url: "/userprofile",
+      url: "/{ID:string}/userprofile/",
       templateUrl: "src/view/userProfile.tmpl"
     })
     .state('changepage', {

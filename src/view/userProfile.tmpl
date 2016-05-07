@@ -1,19 +1,37 @@
-<div class = "container">
-	<div ng-controller = "userProfileController">	
-		<div class="row">
-	        <div class="col-sm-12">
-	            <h1 style="text-transform: uppercase;">Kasetsart University</h1>
-	        </div>
-	    </div>
-	    <div class="row">
-	        <div class="col-sm-12">
-	            <button ng-click = "getUserProfile()">Get user</button>
-	        </div>
-		</div>
-		<div class="row">
-			<div class="col-sm-12">
-	            user name: {{userProfile.name}}
-	        </div>
-		</div>
+<div ng-controller = "userProfileController">	
+	<div class="row">
+        <div class="col-sm-12">
+            <h3>Hello! {{userProfile.firstName}}</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 col-sm-offset-1">
+            <h4>Firstname: </h4>
+        </div>
+        <div class="col-sm-4">    
+            <h4>{{userProfile.firstName}}</h4>
+        </div>
+        <div class="col-sm-2">
+            <h4>ID: </h4>
+        </div>
+        <div class="col-sm-3">    
+            <h4>{{ID}}</h4>
+        </div>
+	</div>
+	<div class="row">
+        <div class="col-sm-2 col-sm-offset-1">
+            <h4>Surname: </h4>
+        </div>
+        <div class="col-sm-4">    
+            <h4>{{userProfile.surName}}</h4>
+        </div>
+	</div>
+	<div class="row">
+        <div class="col-sm-2 col-sm-offset-1">
+            <h4>Gender: </h4>
+        </div>
+        <div class="col-sm-4">    
+            <h4>{{userProfile.sex}}</h4>
+        </div>
 	</div>
 </div>

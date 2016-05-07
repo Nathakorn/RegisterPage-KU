@@ -4,6 +4,8 @@
     <!-- CSS file -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="src/css/todo.css">
+    <link rel="stylesheet" href="src/css/main.css">
+
   </head>
   <body>
     <!-- Import scripts -->
@@ -18,12 +20,31 @@
     <script src="src/js/route/route.js"></script>
 
     <!-- some navigation -->
-    <ul class="nav nav-pills">
-    <li role="presentation"><a ui-sref="home">Home</a></li>
-    <li role="presentation"><a ui-sref="userprofile">User profile</a></li>
-    <li role="presentation"><a ui-sref="changepage">Change Page</a></li>
-  </ul>
-
-    <div ui-view></div>
+    <div class = "container">  
+      <div class="row">
+        <div class="col-sm-12">
+            <img src="src/asset/KasetsartLogo.jpg"  width="400" height="100">
+        </div>
+      </div>
+      <div class="row" id="mainNav">
+          <div class="col-sm-12">
+            <ul class="nav nav-pills">
+              <li role="presentation"><a ui-sref="home">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span> HOME 
+              </a></li>
+              <li role="presentation"><a ui-sref="userprofile">
+              <span class="glyphicon glyphicon-user" aria-hidden="true"></span> USER PROFILE
+              </a></li>
+              <li role="presentation"><a ui-sref="changepage">
+              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> REGISTER
+              </a></li>
+              <li role="presentation"><a ui-sref="changepage">
+              <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> REPORT
+              </a></li>
+            </ul>
+          </div>
+      </div>
+      <div ui-view></div>
+  </div>
   </body>
 </html>
