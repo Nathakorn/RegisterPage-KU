@@ -27,7 +27,9 @@ var app = angular.module('regisKuApp', [
                 "timeRegis": "09:30-10:30",
                 "amount": "60700 Baht",
                 "paymentDate": "07/01/2016",
-                "eligibility": "Eligible"
+                "eligibility": "Eligible",
+
+                "courses": ["01000001", "01000002"]
             }
         });
       /*
@@ -142,6 +144,16 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
       },
         "radio": "left"
       };
+      $scope.course;
+      $http.get('http://52.37.98.127:3000/v1/5610545668/5610545668?pin=1029')
+          .success(function (data){
+            console.log(data);
+            $scope.course = data.courses;
+          })
+          .error(function (data) {
+            console.log(data);
+            $state.go("404");
+          });
 
       $scope.login = function () {
        

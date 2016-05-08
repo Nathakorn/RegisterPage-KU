@@ -1,16 +1,11 @@
 <div ng-controller="registerController">
-     {{hello}}
-     <div class="form-group">
-        <label><i class="fa fa-globe"></i> State</label>
-        <input type="text" class="form-control" ng-model="selectedState" bs-options="state for state in states" placeholder="Enter state" bs-typeahead>
-    </div>
-    <div class="btn-group" ng-model="button.checkbox" bs-checkbox-group>
-  <label class="btn btn-default"><input type="checkbox" value="left"> Left</label>
-  <label class="btn btn-default"><input type="checkbox" value="middle"> Middle</label>
-  <label class="btn btn-default"><input type="checkbox" value="right"> Right</label>
-  <!-- Children get compiled by `bs-checkbox-group` to :
-  <label class="btn btn-default"><input type="checkbox" value="left" ng-model="button.checkbox.left" bs-checkbox> Left</label>
-  ...
-  -->
+     
+  <div class="form-group">
+      <h3>Search subject</h3>
+      <input type="text" class="form-control" ng-model="selectedState" bs-options="state for state in states" placeholder="Enter state" bs-typeahead>
+  </div>
+    
+<div ng-repeat="obj in course">
+  {{obj}}
 </div>
 </div>
