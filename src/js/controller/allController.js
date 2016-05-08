@@ -10,7 +10,14 @@ var app = angular.module('regisKuApp', ['ui.router']);
               "surName": "Sukumsirichart",
               "gender": "male",
               "thaiID": "1234567890123",
-              "nationality": "Thai"
+              "nationality": "Thai",
+
+              "faculty": "Engineering",
+              "majorField": "Software & Knowledge Engineering (E17)",
+              "programType": "International Program (Special Program)",
+              "campus": "Bangkhen",
+              "e-mail": "nathakorn.s@ku.th",
+              "status": "Currently studying"
           }
       });
     /*
