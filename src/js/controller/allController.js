@@ -1,4 +1,4 @@
-var app = angular.module('regisKuApp', ['ui.router', 'mgcrea.ngStrap.helpers.parseOptions']);
+var app = angular.module('regisKuApp', ['ui.router','mgcrea.ngStrap.helpers.parseOptions', 'mgcrea.ngStrap.button'])
   app.controller('userProfileController', ['$scope', '$http', '$stateParams',
     function ($scope, $http, $stateParams) {
       document.getElementById("mainNav").style.visibility = "show";
@@ -130,6 +130,17 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
       $scope.hello = "wakaka";
       $scope.selectedState = "";
       $scope.states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+      
+      $scope.button = {
+        "toggle": false,
+        "checkbox": {
+          "left": false,
+          "middle": true,
+          "right": false
+      },
+        "radio": "left"
+      };
+
       $scope.login = function () {
        
 
