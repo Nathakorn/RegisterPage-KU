@@ -15,11 +15,15 @@ angular.module('regisKuApp')
       templateUrl: "src/view/login.tmpl"
     })
     .state('userprofile', {
-      url: "/userprofile/",
+      url: "/userprofile",
       templateUrl: "src/view/userProfile.tmpl"
     })
-    .state('changepage', {
-      url: "/changepage",
-      templateUrl: "src/view/changepage.tmpl"
+    .state('register', {
+      url: "/register",
+      templateUrl: "src/view/register.tmpl"
+    })
+    .state('report', {
+      url: "/report",
+      templateUrl: "src/view/report.tmpl"
     })
 });
