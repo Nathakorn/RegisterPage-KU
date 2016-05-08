@@ -2,3 +2,8 @@
     border-style: outset;
     border-color: green;
 }
+.clockRealtime{
+	/*padding-top: 2px;*/
+    font-weight: bold;
+    margin-left: 45% !important;
+}

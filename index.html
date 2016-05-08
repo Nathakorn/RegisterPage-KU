@@ -5,9 +5,10 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="src/css/todo.css">
     <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/register.css">
     <link rel="stylesheet" href="src/css/userProfile.css">
   </head>
-  <body>
+  <body onload="startTime()">
     <!-- Import scripts -->
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -17,7 +18,7 @@
     <!-- App controller -->
     <script src="src/js/controller/allController.js"></script>
     <script src="src/js/route/route.js"></script>
-    <script type="text/javascript" src="src/js/main.js"></script>
+    <script src="src/js/main.js"></script>
 
     <!-- some navigation -->
     <div class = "container">  
@@ -47,8 +48,10 @@
               <li role="presentation"><a ui-sref="report">
               <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> REPORT
               </a></li>
-              <li role="presentation">
-              <span id="time"></span> 
+              <li role="presentation" class="clockRealtime">
+                <img src="src/asset/thflag.png"  width="30" height="30">
+                <img src="src/asset/usflag.png"  width="37" height="37">
+                <span id="clock"></span> 
               </li>
             </ul>
           </div>
