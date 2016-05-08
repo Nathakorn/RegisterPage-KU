@@ -1,4 +1,4 @@
-var app = angular.module('regisKuApp', ['ui.router']);
+var app = angular.module('regisKuApp', ['ui.router', 'mgcrea.ngStrap.helpers.parseOptions']);
   app.controller('userProfileController', ['$scope', '$http', '$stateParams',
     function ($scope, $http, $stateParams) {
       document.getElementById("mainNav").style.visibility = "show";
@@ -128,6 +128,8 @@ app.controller('loginController', ['$scope', '$http', '$stateParams', '$location
 app.controller('registerController', ['$scope', '$http', '$stateParams', '$location',
     function ($scope, $http, $stateParams, $location) {
       $scope.hello = "wakaka";
+      $scope.selectedState = "";
+      $scope.states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
       $scope.login = function () {
        
 
@@ -144,3 +146,4 @@ app.controller('reportController', ['$scope', '$http', '$stateParams', '$locatio
       }
   }]);
 
+// 

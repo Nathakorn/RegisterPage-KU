@@ -1,3 +1,7 @@
 <div ng-controller="registerController">
-    
+     {{hello}}
+     <div class="form-group">
+        <label><i class="fa fa-globe"></i> State</label>
+        <input type="text" class="form-control" ng-model="selectedState" bs-options="state for state in states" placeholder="Enter state" bs-typeahead>
+    </div>
 </div>
