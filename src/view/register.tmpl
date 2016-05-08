@@ -1,11 +1,19 @@
 <div ng-controller="registerController">
      
-  <div class="form-group">
-      <h3>Search subject</h3>
-      <input type="text" class="form-control" ng-model="selectedState" bs-options="state for state in states" placeholder="Enter state" bs-typeahead>
+  <div class="row">
+        <div class="col-sm-12">
+            <h3>Search subject</h3>
+        </div>
+    </div>  
+  <div class="row">
+        <div class="col-sm-4">
+            <input type="text" class="form-control" ng-model="selectedState" bs-options="state for state in states" placeholder="Enter subject ID or name" bs-typeahead>
+        </div>
   </div>
-    
+ 
+<!-- 
 <div ng-repeat="obj in course">
   {{obj}}
 </div>
+-->
 </div>

@@ -32,43 +32,29 @@ var app = angular.module('regisKuApp', [
                 "courses": ["01000001", "01000002"]
             }
         });
-      /*
+      
       $http.post('http://52.37.98.127:3000/v1/5610545668?pin=1029', {
-            "5610545001": {
-                "name": "",
-                "courses": ["123458", "1234567"]
-            },
-            "5610545002": {
-                "name": "",
-                "courses": ["123458", "1234567"]
-            },
-            "5610545003": {
-                "name": "",
-                "courses": ["123458", "1234567"]
-            },
-            "5610545004": {
-                "name": "",
-                "courses": ["123458", "1234567"]
-            },
-            "5610545005": {
-                "name": "",
-                "courses": ["123458", "1234567"]
-            },
-
-          })
-          .success(function (data) {
-            console.log(JSON.stringify(data));
-            console.log(data);
-          })
-          .error(function (data) {
-            console.log(data);
-            $state.go("404");
-          });
+            "subjects": {
+                  "01000001":{
+                         "subID": "01000001", 
+                         "subName": "name1"
+                  },
+                  "01000002":{
+                         "subID": "01000002", 
+                         "subName": "name2"
+                  },
+                  "01000003":{
+                         "subID": "01000003", 
+                         "subName": "name3"
+                  }
+            }
+      });
+         
     
       //delete
-      $http.delete('http://52.37.98.127:3000/v1/5610545668/5555555558?pin=1029')
-      $http.delete('http://52.37.98.127:3000/v1/5610545668/5555555556?pin=1029')
-      */   
+      //$http.delete('http://52.37.98.127:3000/v1/5610545668/subjects?pin=1029')
+      //$http.delete('http://52.37.98.127:3000/v1/5610545668/5555555556?pin=1029')
+        
       //Get profile
       $http.get('http://52.37.98.127:3000/v1/5610545668/5610545668?pin=1029')
           .success(function (data){
@@ -131,19 +117,28 @@ app.controller('loginController', ['$scope', '$http', '$stateParams', '$location
 //register
 app.controller('registerController', ['$scope', '$http', '$stateParams', '$location',
     function ($scope, $http, $stateParams, $location) {
-      $scope.hello = "wakaka";
-      $scope.selectedState = "";
-      $scope.states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+      $scope.states = [];
+      $http.get('http://52.37.98.127:3000/v1/5610545668/subjects?pin=1029')
+          .success(function (data){
+            /* 
+              var fullname = "";
+              int i;
+              for (i = 0; i < 2; i++) { 
+                fullname += data[i];
+              }
+            */
+            angular.forEach(data, function(subject){
+              console.log(subject.subID + subject.subName);
+              $scope.states.push(subject.subID +" "+ subject.subName);  
+            });
       
-      $scope.button = {
-        "toggle": false,
-        "checkbox": {
-          "left": false,
-          "middle": true,
-          "right": false
-      },
-        "radio": "left"
-      };
+          })
+          
+      
+      $scope.selectedState = "";
+      //$scope.states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+      
+      
       $scope.course;
       $http.get('http://52.37.98.127:3000/v1/5610545668/5610545668?pin=1029')
           .success(function (data){
