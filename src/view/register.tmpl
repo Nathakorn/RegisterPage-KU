@@ -1,41 +1,62 @@
 <div ng-controller="registerController">
+<div class="row">
+          <div class="col-sm-12">
+              <h3>Search subject</h3>
+          </div>
+    </div> 
+<div class="row">     
+  <div class="col-sm-12"> 
      
-  <div class="row">
-        <div class="col-sm-12">
-            <h3>Search subject</h3>
-        </div>
-  </div>  
-  <div class="row" style="margin-top: 3%;">
-        <div class="col-sm-5">
-            <input type="text" class="form-control" ng-model="selectedSubject" bs-options="state for state in states" placeholder="Enter subject ID or name" bs-typeahead>
-        </div>
+    <div class="row" style="margin-top: 3%;">
+          <div class="col-sm-5">
+              <input type="text" class="form-control" ng-model="selectedSubject" bs-options="state for state in states" placeholder="Enter subject ID or name" bs-typeahead>
+          </div>
+    </div>
+    <div class="row" style="margin-top: 3%;">
+          <div class="col-sm-2">
+              <h4>Select Section:</h4>
+          </div>
+          <div class="col-sm-1" style="margin-top:0.75%;">
+              <select>
+                <option>-</option>
+                <option>1</option>
+                <option>2</option>
+                <option>450</option>
+                <option>451</option>
+              </select>
+          </div>
+    </div>  
+    <div class="row" style="margin-top: 3%;">
+          <div class="col-sm-2" style="margin-top:0.5%;">
+              <div class="btn-group" ng-model="button.radio" bs-radio-group>
+                <label class="btn btn-default"><input type="radio" class="btn btn-default" value="0">Credit</label>
+                <label class="btn btn-default"><input type="radio" class="btn btn-default" value="1">Audit</label>
+              </div>
+          </div>
+          <div class="col-sm-2" style="margin-top: 1%;">
+             <button ng-click="submit()">Submit</button>
+          </div>
+    </div>
   </div>
-  <div class="row" style="margin-top: 3%;">
-        <div class="col-sm-2">
-            <h4>Select Section:</h4>
-        </div>
-        <div class="col-sm-1" style="margin-top:0.75%;">
-            <select>
-              <option>1</option>
-              <option>2</option>
-              <option>450</option>
-              <option>451</option>
-            </select>
-        </div>
-  </div>  
-  <div class="row" style="margin-top: 3%;">
-        <div class="col-sm-2" style="margin-top:0.5%;">
-            <div class="btn-group" ng-model="button.radio" bs-radio-group>
-              <label class="btn btn-default"><input type="radio" class="btn btn-default" value="0">Credit</label>
-              <label class="btn btn-default"><input type="radio" class="btn btn-default" value="1">Audit</label>
-            </div>
-        </div>
-        <div class="col-sm-2" style="margin-top: 1%;">
-           <button>Submit</button>
-        </div>
-
+</div> 
+<div class="row" style="margin-top:3%"> 
+  <div class="panel-group" ng-model="panels.activePanel" role="tablist" aria-multiselectable="true" bs-collapse>
+  <div class="panel panel-default" ng-repeat="panel in panels">
+    <div class="panel-heading" role="tab">
+      <h4 class="panel-title">
+        <a bs-collapse-toggle>
+          {{ panel}}
+        </a>
+      </h4>
+    </div>
+    <div class="panel-collapse" role="tabpanel" bs-collapse-target>
+      <div class="panel-body">
+        {{ panel}}
+      </div>
+    </div>
   </div>
- 
+</div>
+</div>
 <!-- 
 <div ng-repeat="obj in course">
   {{obj}}

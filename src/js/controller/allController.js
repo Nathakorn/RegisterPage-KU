@@ -163,7 +163,13 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
               $scope.states.push(subject.subID +" - "+ subject.subName);  
             });
       })
-
+      $scope.panels = [];
+      $scope.submit = function(){
+          console.log($scope.selectedSubject);
+          $scope.panels.push($scope.selectedSubject);
+          $scope.panels.activePanel = 1;
+      }
+     
       
       
       
