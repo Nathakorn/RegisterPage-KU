@@ -1,4 +1,6 @@
-var app = angular.module('regisKuApp', ['ui.router','mgcrea.ngStrap.helpers.parseOptions', 'mgcrea.ngStrap.button'])
+var app = angular.module('regisKuApp', [
+  'ui.router','mgcrea.ngStrap'
+  ])
   app.controller('userProfileController', ['$scope', '$http', '$stateParams',
     function ($scope, $http, $stateParams) {
       document.getElementById("mainNav").style.visibility = "show";
