@@ -35,21 +35,58 @@ var app = angular.module('regisKuApp', [
       
       $http.post('http://52.37.98.127:3000/v1/5610545668?pin=1029', {
             "subjects": {
-                  "01000001":{
-                         "subID": "01000001", 
-                         "subName": "name1"
+                  "01219111":{
+                         "subID": "01219111", 
+                         "subName": "Object-Oriented Programming I"
                   },
-                  "01000002":{
-                         "subID": "01000002", 
-                         "subName": "name2"
+                  "01219112":{
+                         "subID": "01219112", 
+                         "subName": "Introduction to Information Technology"
                   },
-                  "01000003":{
-                         "subID": "01000003", 
-                         "subName": "name3"
+                  "01417167":{
+                         "subID": "01417167", 
+                         "subName": "Engineering Mathematics I"
+                  },
+                  "01219113":{
+                         "subID": "01219113", 
+                         "subName": "Object-Oriented Programming II"
+                  },
+                  "01219245":{
+                         "subID": "01219245", 
+                         "subName": "Individual Software Development Process"
+                  },
+                  "01204211":{
+                         "subID": "01204211", 
+                         "subName": "Discrete Mathematics"
+                  },
+                  "01204212":{
+                         "subID": "01204212", 
+                         "subName": "Abstract Data Type and Problem Solving"
+                  },
+                  "01204313":{
+                         "subID": "01204313", 
+                         "subName": "Algorithms Design and Analysis"
+                  },
+                  "01204351":{
+                         "subID": "01204351", 
+                         "subName": "Database Systems"
+                  },
+                  "01219271":{
+                         "subID": "01219271", 
+                         "subName": "Knowledge Engineering and Knowledge Management"
+                  },
+                  "01204482":{
+                         "subID": "01204482", 
+                         "subName": "Computer-Human Interfaces"
+                  },
+                  "01219412":{
+                         "subID": "01417167", 
+                         "subName": "Technical Writing for Software and Knowledge Engineers"
                   }
+
             }
       });
-         
+      
     
       //delete
       //$http.delete('http://52.37.98.127:3000/v1/5610545668/subjects?pin=1029')
@@ -129,7 +166,7 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
             */
             angular.forEach(data, function(subject){
               console.log(subject.subID + subject.subName);
-              $scope.states.push(subject.subID +" "+ subject.subName);  
+              $scope.states.push(subject.subID +" - "+ subject.subName);  
             });
       
           })
