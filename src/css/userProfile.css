@@ -1,6 +1,6 @@
 #basic-info{
-	border-bottom: solid;
-	border-color: lightgrey;
+	border-bottom: 0.5px solid;
+	border-color: green;
 }
 #eligibility{
 	color:green;

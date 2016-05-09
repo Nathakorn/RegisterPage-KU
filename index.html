@@ -32,7 +32,8 @@
     <div class = "container">  
       <div class="row">
         <div class="col-sm-12">
-            <img src="src/asset/KasetsartLogo.jpg"  width="400" height="100">
+            <h4 ID="kasetsartLogo">KASETSART UNIVERSITY<h4>
+            <!-- <img src="src/asset/KasetsartLogo.jpg"  width="400" height="100"-->
         </div>
       </div>
       <div class="row" id="mainNav">
@@ -54,14 +55,16 @@
               <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> LOGOUT
               </a></li>
               <li role="presentation" class="clockRealtime">
+                <!--
                 <img src="src/asset/thflag.png"  width="30" height="30">
                 <img src="src/asset/usflag.png"  width="37" height="37">
+                -->
                 <span id="clock"></span> 
               </li>
             </ul>
           </div>
       </div>
-      <div ui-view></div>
+      <div ui-view class="inWeb"></div>
   </div>
   </body>
 </html>

@@ -1,9 +1,19 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100);
+
 #mainNav {
     border-style: outset;
     border-color: green;
+    font-family: 'Roboto', sans-serif;
+}
+#kasetsartLogo{
+	font-family: 'Roboto', sans-serif;
 }
 .clockRealtime{
 	/*padding-top: 2px;*/
     font-weight: bold;
-    margin-left: 35% !important;
+    margin-top:1%;
+    float: right !important;
+}
+.inWeb{
+	font-family: 'Roboto', sans-serif;
 }
