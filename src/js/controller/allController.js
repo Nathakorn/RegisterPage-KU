@@ -166,28 +166,40 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
       $scope.selectedSubject = "";
       $scope.states = [];
       $scope.sec = "";
-      $http.get('https://whsatku.github.io/skecourses/list.json')
+      
+      $http.get('https://whsatku.github.io/skecourses/combined.json')
           .success(function (data){
-              angular.forEach(data, function(subject){
-              //console.log(subject.subID + subject.subName);
-              $scope.states.push(subject.id +" - "+ subject.name.en);  
-            });
+             $scope.courses = data;
       })
       $scope.panels = [];
       $scope.types = { data: "aaaa"};
       $scope.credit = "";
-      $scope.submit = function(){
-        if($scope.selectedSubject != ""){
-          console.log($scope.sec);
-          console.log($scope.credit);
-          $scope.panels.push($scope.selectedSubject);
-          //$scope.selectedSubject = "";
-          $scope.panels.activePanel = 1;
+      $scope.submit = function(selectedSubject){
+          if(selectedSubject != ""){
+          //console.log($scope.sec);
+          
+         
+          /*
           var onlySubID = $scope.selectedSubject.substr(0,8);
           var onlySubName = $scope.selectedSubject.substr(11,$scope.selectedSubject.length);
           console.log(onlySubID);
           console.log(onlySubName);
+          */
           
+          angular.forEach($scope.courses, function (eachSubject) {
+          if (selectedSubject == eachSubject.id){
+              var onlySubName = eachSubject.name.en;
+              console.log(onlySubName);
+              $scope.panels.push(selectedSubject + " " + onlySubName);
+              $scope.panels.activePanel = 1;
+          
+
+          } 
+          })
+            
+            
+           
+          /*
           var selectedSubjectsAL = {};
           selectedSubjectsAL[onlySubID] = {
                         "subID": onlySubID, 
@@ -207,7 +219,7 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
               console.log(tmp)
               $http.post('http://52.37.98.127:3000/v1/5610545668?pin=1029', tmp);
           });
-          
+          */
           
         }
       }
@@ -241,4 +253,18 @@ app.controller('reportController', ['$scope', '$http', '$stateParams', '$locatio
       }
   }]);
 
+app.filter('objFilter', function($filter){
+  return function(input, query){
+    if(!query) return input;
+      var result = [];
+
+      angular.forEach(input, function(v,k){
+          result.push(v);          
+      });
+
+      var refined = $filter('filter')(result,query);
+
+      return refined;
+  };
+});
 // 

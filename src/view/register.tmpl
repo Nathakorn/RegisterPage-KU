@@ -34,38 +34,25 @@
 </div> 
 <div class="row">
   <form name="myForm">     
-    <div class="col-sm-5"> 
-          <div>
-                <input type="text" class="form-control" ng-model="selectedSubject" bs-options="state for state in states" placeholder="Enter subject ID or name" bs-typeahead>
-          </div>
-      
-          <div style="margin-top: 3%;">
-                <div>
-                    <h4>Select Section:</h4>
-                </div>
-                <div style="margin-top:0.75%;">
-                    <select ng-model="sec">
-                      <option  value="-">-</option>
-                      <option  value="1">1</option>
-                      <option  value="2">2</option>
-                      <option  value="450">450</option>
-                      <option  value="451">451</option>
-                    </select>
-                </div>
-          </div> 
-          <div style="margin-top: 3%;">
-            <div class="btn-group" bs-radio-group> 
-              <input type="radio" ng-model="credit" value="Credit"> Credit
-              <input type="radio" ng-model="credit" value="Audit"> Audit
-            </div> 
-          </div>
-
-          <div style="margin-top: 3%;">
-             <button ng-click="submit()">Enroll</button>
-          </div>
-    </div>
-  </form>
     <div class="col-sm-7"> 
+      <div>
+          <h2 align="center" class ="col-sm-7 container fixed-search" >
+            Course Code
+            <input ng-model= "search.id" type="text" class ="form-control ng-pristine ng-valid ng-empty ng-touched"placeholder="Search" style="margin-top:3%">
+          </h2>
+            <div class="container col-sm-12">
+              <div class="list-group" ng-repeat="course in courses | objFilter:search">
+                <li class="list-group-item">
+                  <a href="" class="list-group-item-heading open-AddBookDialog" data-toggle="modal" data-target="#Description" ng-click="">{{course.id}} {{course.name.en}} <br>{{course.name.th}}</br></a>
+                  <p class="list-group-item-text">{{course.description.en}}</p>
+                  
+                </li>
+            </div>
+        </div>
+    </div>
+  </div>  
+  </form>
+    <div class="col-sm-5"> 
         <div class="panel-group" ng-model="panels.activePanel" role="tablist" aria-multiselectable="true" bs-collapse>
         <div class="panel panel-default" ng-repeat="panel in panels">
           <div class="panel-heading" role="tab">
@@ -77,11 +64,38 @@
       </div>
       </div>
 </div>
-<div class ="row">
-    <div class="col-sm-12"> 
-
-    </div>
-</div> 
+ <div class="row">
+         <div class="col-sm-2 col-sm-offset-1">   
+            <div style="margin-top: 3%;">
+                      <div>
+                          <h4>Select Section:</h4>
+                      </div>
+                      <div style="margin-top:0.75%;">
+                          <select ng-model="sec">
+                            <option  value="-">-</option>
+                            <option  value="1">1</option>
+                            <option  value="2">2</option>
+                            <option  value="450">450</option>
+                            <option  value="451">451</option>
+                          </select>
+                      </div>
+            </div> 
+         </div>   
+          <div class="col-sm-2">  
+            <div style="margin-top: 20%;">
+              <div class="btn-group" bs-radio-group> 
+                <input type="radio" ng-model="credit" value="Credit"> Credit
+                <input type="radio" ng-model="credit" value="Audit"> Audit
+              </div> 
+            </div>
+          </div>
+          <div class="col-sm-1"> 
+            <div style="margin-top: 40%;">
+               <button ng-click="submit(search.id)">Enroll</button>
+            </div>
+          </div>  
+        </div>    
+  </div>
   
 <!-- 
 <div ng-repeat="obj in course">
