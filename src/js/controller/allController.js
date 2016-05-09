@@ -29,8 +29,17 @@ var app = angular.module('regisKuApp', [
                 "paymentDate": "07/01/2016",
                 "eligibility": "Eligible",
 
-                "courses": ["01000001", "01000002"]
-            }
+                "courses": ["01000001", "01000002"],
+
+                "selectSubjects": {
+                    "01219111": {
+                         "subID": "01219111", 
+                         "subName": "Object-Oriented Programming I",
+                         "section": "450",
+                         "type": "Credit"
+                    }
+                }
+              }
         });
       
       $http.post('http://52.37.98.127:3000/v1/5610545668?pin=1029', {
@@ -89,7 +98,7 @@ var app = angular.module('regisKuApp', [
       
     
       //delete
-      //$http.delete('http://52.37.98.127:3000/v1/5610545668/subjects?pin=1029')
+      $http.delete('http://52.37.98.127:3000/v1/5610545668/subjects?pin=1029')
       //$http.delete('http://52.37.98.127:3000/v1/5610545668/5555555556?pin=1029')
         
       //Get profile
@@ -156,20 +165,52 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
     function ($scope, $http, $stateParams, $location) {
       $scope.selectedSubject = "";
       $scope.states = [];
-      $http.get('http://52.37.98.127:3000/v1/5610545668/subjects?pin=1029')
+      $scope.sec = "";
+      $http.get('https://whsatku.github.io/skecourses/list.json')
           .success(function (data){
               angular.forEach(data, function(subject){
-              console.log(subject.subID + subject.subName);
-              $scope.states.push(subject.subID +" - "+ subject.subName);  
+              //console.log(subject.subID + subject.subName);
+              $scope.states.push(subject.id +" - "+ subject.name.en);  
             });
       })
       $scope.panels = [];
+      $scope.types = { data: "aaaa"};
+      $scope.credit = "";
       $scope.submit = function(){
-          console.log($scope.selectedSubject);
+        if($scope.selectedSubject != ""){
+          console.log($scope.sec);
+          console.log($scope.credit);
           $scope.panels.push($scope.selectedSubject);
+          //$scope.selectedSubject = "";
           $scope.panels.activePanel = 1;
+          var onlySubID = $scope.selectedSubject.substr(0,8);
+          var onlySubName = $scope.selectedSubject.substr(11,$scope.selectedSubject.length);
+          console.log(onlySubID);
+          console.log(onlySubName);
+          
+          var selectedSubjectsAL = {};
+          selectedSubjectsAL[onlySubID] = {
+                        "subID": onlySubID, 
+                        "subName": onlySubName,
+                        "section": $scope.sec,
+                        "type": $scope.credit
+           };
+          var oldJson = {};
+          $http.get('http://52.37.98.127:3000/v1/5610545668/5610545668?pin=1029')
+          .success(function (data){
+              oldJson = data;
+              console.log(oldJson.firstName);
+              Object.assign(oldJson.selectSubjects,selectedSubjectsAL);
+              console.log(oldJson);
+              var tmp = {};
+              tmp[oldJson.ID] = oldJson;
+              console.log(tmp)
+              $http.post('http://52.37.98.127:3000/v1/5610545668?pin=1029', tmp);
+          });
+          
+          
+        }
       }
-     
       
       
       
