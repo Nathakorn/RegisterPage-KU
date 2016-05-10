@@ -29,7 +29,7 @@ var app = angular.module('regisKuApp', [
                 "paymentDate": "07/01/2016",
                 "eligibility": "Eligible",
 
-                "totalCredit": "0",
+                "totalCredit": 0,
 
                 "selectSubjects": {
                     
@@ -128,7 +128,7 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
       $http.get('https://whsatku.github.io/skecourses/combined.json')
           .success(function (data){
             angular.forEach(data, function (subject) {
-              $scope.typeAheadCourse.push(subject.id + " " + subject.name.en );
+              $scope.typeAheadCourse.push(subject.id + " " + subject.name.en);
             })
             $scope.courses = data;
       })
@@ -141,6 +141,7 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
               if(subject.subID == subID){
                   delete $scope.enrollCourse[subID];
                   console.log($scope.enrollCourse);
+                  $scope.totalCredit -= subject.credit;
               }
         })
         var oldJson = {};
@@ -149,6 +150,7 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
               oldJson = data;
               console.log(oldJson.firstName);
               oldJson.selectSubjects = $scope.enrollCourse;
+              oldJson.totalCredit = $scope.totalCredit;
               console.log(oldJson);
               var tmp = {};
               tmp[oldJson.ID] = oldJson;
@@ -180,7 +182,8 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
                         "subID": selectedSubject, 
                         "subName": eachSubject.name.en,
                         "section": $scope.sec,
-                        "type": $scope.credit
+                        "type": $scope.credit,
+                        "credit": eachSubject.credit.lecture
                };
               Object.assign($scope.enrollCourse,selectedSubjectsAL);
               var oldJson = {};
