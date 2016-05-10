@@ -30,3 +30,14 @@ table, th, td {
 th, td {
     padding: 5px;
 }
+ h4 {
+    font-size: 18px;
+    font-family: Trebuchet MS;
+}
+h3 {
+    font-family: Trebuchet MS;
+}
+p {
+    margin: 0 0 10px;
+    font-family: Trebuchet MS;
+}

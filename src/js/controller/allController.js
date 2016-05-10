@@ -6,6 +6,7 @@ var app = angular.module('regisKuApp', [
       document.getElementById("mainNav").style.visibility = "show";
       //Mock up database
       //Insert
+      /*
       $http.post('http://52.37.98.127:3000/v1/5610545668?pin=1029', {
             "5610545668": {
                 //basic
@@ -37,7 +38,7 @@ var app = angular.module('regisKuApp', [
                 
               }
         });
-     
+      */
       //delete
       $http.delete('http://52.37.98.127:3000/v1/5610545668/subjects?pin=1029')
       //$http.delete('http://52.37.98.127:3000/v1/5610545668/5555555556?pin=1029')
@@ -60,34 +61,7 @@ var app = angular.module('regisKuApp', [
 //home
 app.controller('TodoListController', ['$scope', 
     function ($scope) {
-      document.getElementById("mainNav").style.visibility = "show";
-      var todoList = this;
-      $scope.testScope = 'korn';
-
-      $scope.todos = [
-        {text: 'learn angular', done: true},
-        {text: 'build an angular app', done: false}]
-
-      $scope.addTodo = function () {
-        todoList.todos.push({text: todoList.todoText, done: false})
-        todoList.todoText = ''
-      }
-
-      $scope.remaining = function () {
-        var count = 0
-        angular.forEach(todoList.todos, function (todo) {
-          count += todo.done ? 0 : 1
-        })
-        return count
-      }
-
-      $scope.archive = function () {
-        var oldTodos = todoList.todos
-        todoList.todos = []
-        angular.forEach(oldTodos, function (todo) {
-          if (!todo.done) todoList.todos.push(todo)
-        })
-    }
+     
 }]);
 
 //login
@@ -239,7 +213,14 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
 //report 
 app.controller('reportController', ['$scope', '$http', '$stateParams', '$location',
     function ($scope, $http, $stateParams, $location) {
-      $scope.hello = "wakaka2";
+      $scope.totalCredit;
+      $http.get('http://52.37.98.127:3000/v1/5610545668/5610545668?pin=1029')
+          .success(function (data){
+            $scope.totalCredit = data.totalCredit;
+            $scope.enrollCourse = data.selectSubjects;
+            console.log($scope.enrollCourse);
+      });
+
       $scope.login = function () {
         
 
