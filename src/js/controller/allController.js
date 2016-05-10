@@ -1,8 +1,8 @@
 var app = angular.module('regisKuApp', [
   'ui.router','mgcrea.ngStrap'
   ])
-  app.controller('userProfileController', ['$scope', '$http', '$stateParams',
-    function ($scope, $http, $stateParams) {
+  app.controller('userProfileController', ['$scope', '$http', '$stateParams', '$window',
+    function ($scope, $http, $stateParams, $window) {
       document.getElementById("mainNav").style.visibility = "show";
       //Mock up database
       //Insert
@@ -110,6 +110,12 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
       $scope.sec = "";
       $scope.enrollCourse = {};
       $scope.totalCredit;
+      $scope.sumCredit;
+      $scope.alert = {
+        "title": "Holy guacamole!",
+        "content": "Best check yo self, you're not looking too good.",
+        "type": "info"
+      };
      $http.get('http://52.37.98.127:3000/v1/5610545668/5610545668?pin=1029')
       .success(function (data){
         console.log("total credit = " + data.totalCredit);
@@ -128,7 +134,7 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
       $http.get('https://whsatku.github.io/skecourses/combined.json')
           .success(function (data){
             angular.forEach(data, function (subject) {
-              $scope.typeAheadCourse.push(subject.id + " " + subject.name.en);
+              $scope.typeAheadCourse.push(subject.id);
             })
             $scope.courses = data;
       })
@@ -170,46 +176,45 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
           console.log(onlySubName);
           */
           
-          angular.forEach($scope.courses, function (eachSubject) {
-          if (selectedSubject == eachSubject.id){
-              var onlySubName = eachSubject.name.en;
-              console.log(onlySubName);
-              if(eachSubject.credit.lecture != null){
-                $scope.totalCredit += eachSubject.credit.lecture;
-              }
-              var selectedSubjectsAL = {};
-                selectedSubjectsAL[selectedSubject] = {
-                        "subID": selectedSubject, 
-                        "subName": eachSubject.name.en,
-                        "section": $scope.sec,
-                        "type": $scope.credit,
-                        "credit": eachSubject.credit.lecture
-               };
-              Object.assign($scope.enrollCourse,selectedSubjectsAL);
-              var oldJson = {};
-              $http.get('http://52.37.98.127:3000/v1/5610545668/5610545668?pin=1029')
-              .success(function (data){
-              oldJson = data;
-              console.log(oldJson.firstName);
-              Object.assign(oldJson.selectSubjects,selectedSubjectsAL);
-              oldJson.totalCredit = $scope.totalCredit;
-              console.log(oldJson);
-              var tmp = {};
-              tmp[oldJson.ID] = oldJson;
-              console.log(tmp)
-              $http.post('http://52.37.98.127:3000/v1/5610545668?pin=1029', tmp);
-          });
+            angular.forEach($scope.courses, function (eachSubject) {
+            if (selectedSubject == eachSubject.id){
+                var onlySubName = eachSubject.name.en;
+                console.log(onlySubName);
+                if($scope.totalCredit + eachSubject.credit.lecture <= 7 && 
+                  eachSubject.credit.lecture != null){
+                  if(eachSubject.credit.lecture != null){
+                    $scope.totalCredit += eachSubject.credit.lecture;
+                  }
+                  var selectedSubjectsAL = {};
+                    selectedSubjectsAL[selectedSubject] = {
+                            "subID": selectedSubject, 
+                            "subName": eachSubject.name.en,
+                            "section": $scope.sec,
+                            "type": $scope.credit,
+                            "credit": eachSubject.credit.lecture
+                   };
+                  Object.assign($scope.enrollCourse,selectedSubjectsAL);
+                  var oldJson = {};
+                  $http.get('http://52.37.98.127:3000/v1/5610545668/5610545668?pin=1029')
+                  .success(function (data){
+                    oldJson = data;
+                    console.log(oldJson.firstName);
+                    Object.assign(oldJson.selectSubjects,selectedSubjectsAL);
+                    oldJson.totalCredit = $scope.totalCredit;
+                    console.log(oldJson);
+                    var tmp = {};
+                    tmp[oldJson.ID] = oldJson;
+                    console.log(tmp)
+                    $http.post('http://52.37.98.127:3000/v1/5610545668?pin=1029', tmp);
+                  });
+                }else{
+                    // more than 22 unit
+                    $scope.sumCredit = $scope.totalCredit + eachSubject.credit.lecture;
+                }
+          }
 
-          } 
           })
-            
-            
-           
-          /*
-         
-          */
-          
-        }
+         }
       }
       
       
@@ -232,9 +237,9 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
   }]);
 
 //report 
-app.controller('reportController', ['$scope', '$http', '$stateParams', '$location',
+app.controller('mainController', ['$scope', '$http', '$stateParams', '$location',
     function ($scope, $http, $stateParams, $location) {
-      $scope.hello = "wakaka2";
+      
       $scope.login = function () {
         
 
