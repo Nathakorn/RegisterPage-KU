@@ -180,7 +180,7 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
             if (selectedSubject == eachSubject.id){
                 var onlySubName = eachSubject.name.en;
                 console.log(onlySubName);
-                if($scope.totalCredit + eachSubject.credit.lecture <= 7 && 
+                if($scope.totalCredit + eachSubject.credit.lecture <= 22 && 
                   eachSubject.credit.lecture != null){
                   if(eachSubject.credit.lecture != null){
                     $scope.totalCredit += eachSubject.credit.lecture;
@@ -237,9 +237,9 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
   }]);
 
 //report 
-app.controller('mainController', ['$scope', '$http', '$stateParams', '$location',
+app.controller('reportController', ['$scope', '$http', '$stateParams', '$location',
     function ($scope, $http, $stateParams, $location) {
-      
+      $scope.hello = "wakaka2";
       $scope.login = function () {
         
 
