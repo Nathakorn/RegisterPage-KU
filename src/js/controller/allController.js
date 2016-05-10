@@ -29,74 +29,15 @@ var app = angular.module('regisKuApp', [
                 "paymentDate": "07/01/2016",
                 "eligibility": "Eligible",
 
-                "courses": ["01000001", "01000002"],
+                "totalCredit": "0",
 
                 "selectSubjects": {
-                    "01219111": {
-                         "subID": "01219111", 
-                         "subName": "Object-Oriented Programming I",
-                         "section": "450",
-                         "type": "Credit"
-                    }
+                    
                 }
+                
               }
         });
-      
-      $http.post('http://52.37.98.127:3000/v1/5610545668?pin=1029', {
-            "subjects": {
-                  "01219111":{
-                         "subID": "01219111", 
-                         "subName": "Object-Oriented Programming I"
-                  },
-                  "01219112":{
-                         "subID": "01219112", 
-                         "subName": "Introduction to Information Technology"
-                  },
-                  "01417167":{
-                         "subID": "01417167", 
-                         "subName": "Engineering Mathematics I"
-                  },
-                  "01219113":{
-                         "subID": "01219113", 
-                         "subName": "Object-Oriented Programming II"
-                  },
-                  "01219245":{
-                         "subID": "01219245", 
-                         "subName": "Individual Software Development Process"
-                  },
-                  "01204211":{
-                         "subID": "01204211", 
-                         "subName": "Discrete Mathematics"
-                  },
-                  "01204212":{
-                         "subID": "01204212", 
-                         "subName": "Abstract Data Type and Problem Solving"
-                  },
-                  "01204313":{
-                         "subID": "01204313", 
-                         "subName": "Algorithms Design and Analysis"
-                  },
-                  "01204351":{
-                         "subID": "01204351", 
-                         "subName": "Database Systems"
-                  },
-                  "01219271":{
-                         "subID": "01219271", 
-                         "subName": "Knowledge Engineering and Knowledge Management"
-                  },
-                  "01204482":{
-                         "subID": "01204482", 
-                         "subName": "Computer-Human Interfaces"
-                  },
-                  "01219412":{
-                         "subID": "01417167", 
-                         "subName": "Technical Writing for Software and Knowledge Engineers"
-                  }
-
-            }
-      });
-      
-    
+     
       //delete
       $http.delete('http://52.37.98.127:3000/v1/5610545668/subjects?pin=1029')
       //$http.delete('http://52.37.98.127:3000/v1/5610545668/5555555556?pin=1029')
@@ -155,6 +96,7 @@ app.controller('loginController', ['$scope', '$http', '$stateParams', '$location
       //document.getElementById("mainNav").style.visibility = "hidden";
       $scope.login = function () {
         console.log($scope.ID);
+        //startTime();
         $location.path("/userprofile");
 
       }
@@ -163,22 +105,62 @@ app.controller('loginController', ['$scope', '$http', '$stateParams', '$location
 //register
 app.controller('registerController', ['$scope', '$http', '$stateParams', '$location',
     function ($scope, $http, $stateParams, $location) {
-      $scope.selectedSubject = "";
-      $scope.states = [];
+      //$scope.selectedSubject = "";
+      $scope.typeAheadCourse = [];
       $scope.sec = "";
+      $scope.enrollCourse = {};
+      $scope.totalCredit;
+     $http.get('http://52.37.98.127:3000/v1/5610545668/5610545668?pin=1029')
+      .success(function (data){
+        console.log("total credit = " + data.totalCredit);
+        $scope.totalCredit = data.totalCredit;  
+      })
       
+
+      $http.get('http://52.37.98.127:3000/v1/5610545668/5610545668?pin=1029')
+          .success(function (data){
+            $scope.enrollCourse = data.selectSubjects;
+           
+      });
+      
+
+
       $http.get('https://whsatku.github.io/skecourses/combined.json')
           .success(function (data){
-             $scope.courses = data;
+            angular.forEach(data, function (subject) {
+              $scope.typeAheadCourse.push(subject.id + " " + subject.name.en );
+            })
+            $scope.courses = data;
       })
       $scope.panels = [];
       $scope.types = { data: "aaaa"};
       $scope.credit = "";
+      $scope.dropSubject = function(subID){
+        console.log(subID);
+        angular.forEach($scope.enrollCourse, function (subject) {
+              if(subject.subID == subID){
+                  delete $scope.enrollCourse[subID];
+                  console.log($scope.enrollCourse);
+              }
+        })
+        var oldJson = {};
+              $http.get('http://52.37.98.127:3000/v1/5610545668/5610545668?pin=1029')
+              .success(function (data){
+              oldJson = data;
+              console.log(oldJson.firstName);
+              oldJson.selectSubjects = $scope.enrollCourse;
+              console.log(oldJson);
+              var tmp = {};
+              tmp[oldJson.ID] = oldJson;
+              console.log(tmp)
+              $http.post('http://52.37.98.127:3000/v1/5610545668?pin=1029', tmp);
+          });
+
+      }
       $scope.submit = function(selectedSubject){
           if(selectedSubject != ""){
-          //console.log($scope.sec);
           
-         
+          //console.log($scope.sec);
           /*
           var onlySubID = $scope.selectedSubject.substr(0,8);
           var onlySubName = $scope.selectedSubject.substr(11,$scope.selectedSubject.length);
@@ -190,9 +172,30 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
           if (selectedSubject == eachSubject.id){
               var onlySubName = eachSubject.name.en;
               console.log(onlySubName);
-              $scope.panels.push(selectedSubject + " " + onlySubName);
-              $scope.panels.activePanel = 1;
-          
+              if(eachSubject.credit.lecture != null){
+                $scope.totalCredit += eachSubject.credit.lecture;
+              }
+              var selectedSubjectsAL = {};
+                selectedSubjectsAL[selectedSubject] = {
+                        "subID": selectedSubject, 
+                        "subName": eachSubject.name.en,
+                        "section": $scope.sec,
+                        "type": $scope.credit
+               };
+              Object.assign($scope.enrollCourse,selectedSubjectsAL);
+              var oldJson = {};
+              $http.get('http://52.37.98.127:3000/v1/5610545668/5610545668?pin=1029')
+              .success(function (data){
+              oldJson = data;
+              console.log(oldJson.firstName);
+              Object.assign(oldJson.selectSubjects,selectedSubjectsAL);
+              oldJson.totalCredit = $scope.totalCredit;
+              console.log(oldJson);
+              var tmp = {};
+              tmp[oldJson.ID] = oldJson;
+              console.log(tmp)
+              $http.post('http://52.37.98.127:3000/v1/5610545668?pin=1029', tmp);
+          });
 
           } 
           })
@@ -200,25 +203,7 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
             
            
           /*
-          var selectedSubjectsAL = {};
-          selectedSubjectsAL[onlySubID] = {
-                        "subID": onlySubID, 
-                        "subName": onlySubName,
-                        "section": $scope.sec,
-                        "type": $scope.credit
-           };
-          var oldJson = {};
-          $http.get('http://52.37.98.127:3000/v1/5610545668/5610545668?pin=1029')
-          .success(function (data){
-              oldJson = data;
-              console.log(oldJson.firstName);
-              Object.assign(oldJson.selectSubjects,selectedSubjectsAL);
-              console.log(oldJson);
-              var tmp = {};
-              tmp[oldJson.ID] = oldJson;
-              console.log(tmp)
-              $http.post('http://52.37.98.127:3000/v1/5610545668?pin=1029', tmp);
-          });
+         
           */
           
         }
