@@ -40,7 +40,7 @@ var app = angular.module('regisKuApp', [
         });
       */
       //delete
-      $http.delete('http://52.37.98.127:3000/v1/5610545668/subjects?pin=1029')
+      //$http.delete('http://52.37.98.127:3000/v1/5610545668/subjects?pin=1029')
       //$http.delete('http://52.37.98.127:3000/v1/5610545668/5555555556?pin=1029')
         
       //Get profile
@@ -154,8 +154,7 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
             if (selectedSubject == eachSubject.id){
                 var onlySubName = eachSubject.name.en;
                 console.log(onlySubName);
-                if($scope.totalCredit + eachSubject.credit.lecture <= 22 && 
-                  eachSubject.credit.lecture != null){
+                if($scope.totalCredit + eachSubject.credit.lecture <= 22){
                   if(eachSubject.credit.lecture != null){
                     $scope.totalCredit += eachSubject.credit.lecture;
                   }
