@@ -72,13 +72,19 @@
 	    	</div>
 	    </div>	
     </div>		
-    <div>
+    <div class="row">
     	<div class="col-sm-2 col-sm-offset-6">
 	    		<h4>total credit:</h4>
 	    </div>	
 	    <div class="col-sm-2">
 	    		<h4>{{totalCredit}}</h4>
 	    </div>
-	    </div>	
-    </div>	
-</div>
+	    <div class="col-sm-2" style="margin-top:1%">
+	    		<button ng-click="getJson()">Export JSON</button>
+		</div>
+	</div>
+	<div>
+		<pre>{{translateJson}}</pre>
+	</div>	
+</div>	
+

@@ -213,6 +213,7 @@ app.controller('registerController', ['$scope', '$http', '$stateParams', '$locat
 app.controller('reportController', ['$scope', '$http', '$stateParams', '$location',
     function ($scope, $http, $stateParams, $location) {
       $scope.totalCredit;
+      $scope.translateJson = {};
       $http.get('http://52.37.98.127:3000/v1/5610545668/5610545668?pin=1029')
           .success(function (data){
             $scope.totalCredit = data.totalCredit;
@@ -220,9 +221,13 @@ app.controller('reportController', ['$scope', '$http', '$stateParams', '$locatio
             console.log($scope.enrollCourse);
       });
 
-      $scope.login = function () {
-        
-
+      $scope.getJson = function () {
+        $http.get('http://52.37.98.127:3000/v1/5610545668/5610545668?pin=1029')
+          .success(function (data){
+            //console.log(data);
+            $scope.translateJson = data;
+            $scope.translateJson = JSON.stringify($scope.translateJson, undefined, 2);
+          })
       }
   }]);
 
